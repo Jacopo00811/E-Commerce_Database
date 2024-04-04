@@ -54,13 +54,6 @@ CREATE TABLE Orders
     
     
     
-    
-    
-    
-    
-    
-    
-    
 CREATE TABLE Items
 	(CartID VARCHAR(8),
 	 ProductID VARCHAR(8),
@@ -114,4 +107,46 @@ insert Category values
 ("4","notFood"),
 ("5","Food");
 
+
+insert Product values
+('11', '1', 'fish', 'This is fish for cats', 10.99, 3),
+('22', '2', 'Bone', 'This is Bone for dogs', 100.99, 1000),
+('33', '3', 'Big Mac', 'This is a burger', 1.99, 1),
+('44', '4', 'Rocks', 'Do not eat rocks', 0.99, 1000000),
+('55', '4', 'more rocks', 'could be edible', 1.99, 0);
+
+
+
+insert Cart values
+("CART01","1234"),
+("CART02","12345"),
+("CART03","12346"),
+("CART04","12347"),
+("CART05","12348");
+
+
+insert Items values
+("Cart01", "11"),
+("Cart01", "22"),
+("Cart02", "44"),
+("Cart02", "55"),
+("Cart03", "33");
+
+
+insert Creates values
+("Anna@gmail.com", "Cart03","33"),
+("Bob@dtu.dk", "Cart01","11"),
+("Bob@dtu.dk", "Cart01","22"),
+("Donald@trump.com", "Cart02","44"),
+("Donald@trump.com", "Cart02","55");
+
+
+
+
+insert Review values
+("R1","11","5","IS fish"),
+("R2","11","5","IS very good fish"),
+("R3","44","4","good rocks"),
+("R4","55","1","not edible"),
+("R5","33","3","Not worth");
 
