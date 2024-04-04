@@ -27,13 +27,13 @@ CREATE TABLE Orders
 	 PRIMARY KEY(OrderID)
 	);
     
-    CREATE TABLE Category
+CREATE TABLE Category
 	(CategoryID VARCHAR(8),
      CategoryName VARCHAR(30) NOT NULL,
 	 PRIMARY KEY(CategoryID)
 	);
     
-    CREATE TABLE Product
+CREATE TABLE Product
 	(ProductID VARCHAR(8),
      CategoryID VARCHAR(8),
      ProductName VARCHAR(30) NOT NULL,
@@ -44,10 +44,10 @@ CREATE TABLE Orders
      FOREIGN KEY(CategoryID) REFERENCES Category(CategoryID) ON DELETE CASCADE
 	);
     
-    CREATE TABLE Cart
+CREATE TABLE Cart
 	(CartID VARCHAR(320),
 	 OrderID VARCHAR(8),
-	 # Items , # TODO: decide the type
+	
 	 PRIMARY KEY(CartID),
      FOREIGN KEY(OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE
 	);
@@ -66,12 +66,12 @@ CREATE TABLE Items
 
 CREATE TABLE Creates
 	(CustomerEmail VARCHAR(320),
-	 CartID VARCHAR(8),
-	 ProductID VARCHAR(8),
-	 PRIMARY KEY(CustomerEmail, CartID, ProductID),
+	 CartID VARCHAR(8) NOT NULL UNIQUE,
+	 CreationDate Date,
+	 PRIMARY KEY(CustomerEmail),
      FOREIGN KEY(CustomerEmail) REFERENCES Customer(CustomerEmail) ON DELETE CASCADE,
-     FOREIGN KEY(CartID) REFERENCES Cart(CartID) ON DELETE CASCADE,
-     FOREIGN KEY(ProductID) REFERENCES Product(ProductID) ON DELETE CASCADE
+     FOREIGN KEY(CartID) REFERENCES Cart(CartID) ON DELETE CASCADE
+    
 	);
     
 CREATE TABLE Review
@@ -79,19 +79,20 @@ CREATE TABLE Review
 	 ProductID VARCHAR(8),
      Rating INT CHECK (Rating > 0 AND Rating <= 5),
      Title VARCHAR(30) NOT NULL,
-     # Text VARCHAR(300) NOT NULL, # TODO: Change name here and in previous steps becase Text is a keyword
-     # Date Date, # TODO: Change name here and in previous steps becase Date is a keyword
+     body VARCHAR(300) NOT NULL, 
+     reviewDate Date,
 	 PRIMARY KEY(ReviewID),
      FOREIGN KEY(ProductID) REFERENCES Product(ProductID) ON DELETE CASCADE
 	);
     
+
 
 insert Customer Values
 ("Anna@gmail.com","Anna","London"),
 ("Bob@dtu.dk","Bob","Hemple"),
 ("Charlie@Ku.dk","Chaelie","KBH"),
 ("Donald@trump.com","Donald","Jail"),
-("Eric@Eric.Eric","Eric","Eric");
+("Eric@Eric.Eric","Eric","Kampsax");
 
 insert Orders Values
 ("1234","2010-04-03"),
@@ -134,19 +135,18 @@ insert Items values
 
 
 insert Creates values
-("Anna@gmail.com", "Cart03","33"),
-("Bob@dtu.dk", "Cart01","11"),
-("Bob@dtu.dk", "Cart01","22"),
-("Donald@trump.com", "Cart02","44"),
-("Donald@trump.com", "Cart02","55");
-
-
-
+("Anna@gmail.com", "Cart03","2020-05-04"),
+("Bob@dtu.dk", "Cart01","2015-09-04"),
+("Donald@trump.com", "Cart02","2120-12-04");
 
 insert Review values
-("R1","11","5","IS fish"),
-("R2","11","5","IS very good fish"),
-("R3","44","4","good rocks"),
-("R4","55","1","not edible"),
-("R5","33","3","Not worth");
+("R1","11","4","IS fish","This fish had great flavor and consistancy","2020-04-03"),
+("R2","11","5","IS very good fish","This fish had great flavor and consistancy","2000-04-03"),
+("R3","44","4","good rocks","This fish had great flavor and consistancy, but was too bony","2010-04-15"),
+("R4","55","1","not edible","This fish had way too many bones and smelled old","2010-04-03"),
+("R5","33","3","Not worth","I weighed the fish to 200g instead of the expected 400g","2010-01-03");
+
+
+
+
 
