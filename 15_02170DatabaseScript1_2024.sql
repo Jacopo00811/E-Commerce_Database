@@ -27,6 +27,40 @@ CREATE TABLE Orders
 	 PRIMARY KEY(OrderID)
 	);
     
+    CREATE TABLE Category
+	(CategoryID VARCHAR(8),
+     CategoryName VARCHAR(30) NOT NULL,
+	 PRIMARY KEY(CategoryID)
+	);
+    
+    CREATE TABLE Product
+	(ProductID VARCHAR(8),
+     CategoryID VARCHAR(8),
+     ProductName VARCHAR(30) NOT NULL,
+     ProductDesciption VARCHAR(100) NOT NULL,
+     Price DECIMAL(10, 2) NOT NULL,
+	 Stock INT,
+	 PRIMARY KEY(ProductID),
+     FOREIGN KEY(CategoryID) REFERENCES Category(CategoryID) ON DELETE CASCADE
+	);
+    
+    CREATE TABLE Cart
+	(CartID VARCHAR(320),
+	 OrderID VARCHAR(8),
+	 # Items , # TODO: decide the type
+	 PRIMARY KEY(CartID),
+     FOREIGN KEY(OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE
+	);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 CREATE TABLE Items
 	(CartID VARCHAR(8),
 	 ProductID VARCHAR(8),
@@ -35,13 +69,7 @@ CREATE TABLE Items
      FOREIGN KEY(ProductID) REFERENCES Product(ProductID) ON DELETE CASCADE
 	);
     
-CREATE TABLE Cart
-	(CartID VARCHAR(320),
-	 OrderID VARCHAR(8),
-	 # Items , # TODO: decide the type
-	 PRIMARY KEY(CartID),
-     FOREIGN KEY(OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE
-	);
+
 
 CREATE TABLE Creates
 	(CustomerEmail VARCHAR(320),
@@ -56,7 +84,7 @@ CREATE TABLE Creates
 CREATE TABLE Review
 	(ReviewID VARCHAR(8),
 	 ProductID VARCHAR(8),
-     Rating INT CHECK (ExampleColumn >= 0 AND ExampleColumn <= 5) NOT NULL,
+     Rating INT CHECK (Rating > 0 AND Rating <= 5),
      Title VARCHAR(30) NOT NULL,
      # Text VARCHAR(300) NOT NULL, # TODO: Change name here and in previous steps becase Text is a keyword
      # Date Date, # TODO: Change name here and in previous steps becase Date is a keyword
@@ -64,21 +92,26 @@ CREATE TABLE Review
      FOREIGN KEY(ProductID) REFERENCES Product(ProductID) ON DELETE CASCADE
 	);
     
-CREATE TABLE Product
-	(ProductID VARCHAR(8),
-     CategoryID VARCHAR(8),
-     ProductName VARCHAR(30) NOT NULL,
-     ProductDesciption VARCHAR(100) NOT NULL,
-     Price DECIMAL(10, 2) NOT NULL,
-	 Stock INT,
-	 PRIMARY KEY(ProductID),
-     FOREIGN KEY(CategoryID) REFERENCES Category(CategoryID) ON DELETE CASCADE
-	);
-    
-CREATE TABLE Category
-	(CategoryID VARCHAR(8),
-     CategoryName VARCHAR(30) NOT NULL,
-	 PRIMARY KEY(CategoryID)
-	);
-    
-    
+
+insert Customer Values
+("Anna@gmail.com","Anna","London"),
+("Bob@dtu.dk","Bob","Hemple"),
+("Charlie@Ku.dk","Chaelie","KBH"),
+("Donald@trump.com","Donald","Jail"),
+("Eric@Eric.Eric","Eric","Eric");
+
+insert Orders Values
+("1234","2010-04-03"),
+("12345","2020-05-04"),
+("12346","2009-06-06"),
+("12347","2019-01-01"),
+("12348","1999-05-03");
+
+insert Category values 
+("1","Cat Food"),
+("2","Dog Food"),
+("3","human Food"),
+("4","notFood"),
+("5","Food");
+
+
