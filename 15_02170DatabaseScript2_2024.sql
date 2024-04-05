@@ -42,17 +42,25 @@ SELECT * FROM items;
 SELECT productid, stock FROM product;
  
 -- TRIGGER 
--- If product is removed remove all its reviews and remove it from carts
+-- Changes all bad reviews to be good reviews
 
-DROP TRIGGER IF EXISTS RemoveReviews;
+DROP TRIGGER IF EXISTS RemoveBaDReviews;
 DELIMITER //
-CREATE TRIGGER RemoveReviews BEFORE DELETE ON product
+CREATE TRIGGER RemoveBaDReviews Before insert on Review
 FOR EACH ROW
-BEGIN
-DELETE FROM Review where Review.ProductID= OLD.Productid;
-DELETE FROM items where items.ProductID= OLD.Productid;
-END//
+If New.rating=1 
+-- then update Review Set rating =5 where ReviewID = new.ReviewID;
+then SET NEW.rating=5;
+Set New.Title = "10/10 Would buy again";
+Set New.body= "The best purchase of my life would recomened, \n -Totaly real person";
+
+
+END if//
 DELIMITER ;
+
+
+insert Review value  ("R6","11","1","IS very bad fish","This fish had awful flavor and consistancy","2000-04-03");
+select * from Review;
 
 
 -- DELETE STATEMENT
