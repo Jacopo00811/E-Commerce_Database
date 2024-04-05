@@ -148,6 +148,7 @@ SELECT * FROM Orders;
 SELECT * FROM Category;
 SELECT * FROM Product;
 SELECT * FROM Review;
+SELECT * FROM Customer;
 
 # Calling the view
 SELECT * FROM ProductAndReviews;
