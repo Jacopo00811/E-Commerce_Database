@@ -1,3 +1,25 @@
+--Queries:
+SELECT CustomerEmail, CartID, COUNT(DISTINCT ProductID) AS Products,SUM(price) AS $Total 
+FROM creates NATURAL JOIN cart NATURAL JOIN items NATURAL JOIN product
+GROUP BY CartID
+
+-- Get reviews ordered by review id
+SELECT ReviewID,ProductID,ProductName,Rating,Title,body,reviewDate 
+FROM Review NATURAL JOIN Product 
+WHERE ProductID IN (11)
+ORDER BY reviewDate
+
+-- Get the average starrating of Products
+SELECT ProductName,AVG(Rating) 
+FROM Review NATURAL JOIN Product 
+GROUP BY ProductID
+HAVING AVG(Rating) > 2
+
+
+
+
+
+
 -- Give examples of a function, a procedure and a trigger and explain what they do. Give one example of each.
 
 -- FUNCTION
