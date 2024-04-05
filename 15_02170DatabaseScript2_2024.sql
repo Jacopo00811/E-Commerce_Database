@@ -56,11 +56,13 @@ DELIMITER ;
 
 
 -- DELETE STATEMENT
+-- This statement shows you how you can drop a product from the website
 DELETE FROM Product WHERE ProductID="33";
 SELECT * FROM Review;
 SELECT * FROM Items;
 
 -- UPDATE STATEMENT
+-- This statement shows how you can change a review of a product if you change your mind in the future
 UPDATE Review
 SET Rating = 5, Title = "Best fish Ever", Body = "I love rotten fish" 
 WHERE ReviewID = "R4";
